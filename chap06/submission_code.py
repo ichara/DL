@@ -102,8 +102,10 @@ for epoch in range(n_epochs):
         cost_valid,
         accuracy_score(t_valid.argmax(axis=1), y_pred.argmax(axis=1))
     ))
+    if accuracy_score(t_valid.argmax(axis=1), y_pred.argmax(axis=1)) >= 0.730:
+        break;
 
-y_pred = sess.run(y, feed_dict={x: x_test, is_training: False}).argmax(axis=1)
+y_pred = sess.run(y, feed_dict={x: x_test_zca, is_training: False}).argmax(axis=1)
 submission = pd.Series(y_pred, name='label')
 submission.to_csv('/root/userspace/chap06/materials/submission_pred.csv', header=True, index_label='id')
 
